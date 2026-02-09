@@ -46,6 +46,8 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
             addBasicTrollPlusCompletions(sender);
         } else if (args.length == 2 && args[0].equals("blocklist")) {
             addBlocklistCompletions(sender);
+        } else if (args.length == 2 && args[0].equals("regionblacklist")) {
+            addRegionBlacklistCompletions(sender);
         } else if (args.length == 3 && args[0].equals("blocklist"))
             addOnlinePlayerCompletions(); // Add online players to completion list
     }
@@ -58,6 +60,8 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
             results.add("reload");
         if (sender.hasPermission(PermissionConstants.PERMISSION_TROLLPLUS_BLOCKLIST_ADD) || sender.hasPermission(PermissionConstants.PERMISSION_TROLLPLUS_BLOCKLIST_REMOVE))
             results.add("blocklist");
+        if (sender.hasPermission(PermissionConstants.PERMISSION_TROLLPLUS_REGION_BLACKLIST_ADD) || sender.hasPermission(PermissionConstants.PERMISSION_TROLLPLUS_REGION_BLACKLIST_REMOVE))
+            results.add("regionblacklist");
         if (sender.hasPermission(PermissionConstants.PERMISSION_TROLLPLUS_SETTINGS))
             results.add("settings");
     }
@@ -67,6 +71,13 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
         if (sender.hasPermission(PermissionConstants.PERMISSION_TROLLPLUS_BLOCKLIST_ADD))
             results.add("add");
         if (sender.hasPermission(PermissionConstants.PERMISSION_TROLLPLUS_BLOCKLIST_REMOVE))
+            results.add("remove");
+    }
+
+    private void addRegionBlacklistCompletions(CommandSender sender) {
+        if (sender.hasPermission(PermissionConstants.PERMISSION_TROLLPLUS_REGION_BLACKLIST_ADD))
+            results.add("add");
+        if (sender.hasPermission(PermissionConstants.PERMISSION_TROLLPLUS_REGION_BLACKLIST_REMOVE))
             results.add("remove");
     }
 

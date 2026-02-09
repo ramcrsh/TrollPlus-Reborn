@@ -39,6 +39,9 @@ set-fire: false
 # Allow explosions to destroy blocks for "TNT track" and "Trollbows" features. [Default: false]
 break-blocks: false
 
+# List of WorldGuard regions where troll features are disabled for targets. [Default: []]
+region-blacklist: []
+
 ###################### Troll Settings #######################
 
 # Vanish Feature

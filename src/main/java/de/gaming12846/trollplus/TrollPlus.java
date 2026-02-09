@@ -26,6 +26,7 @@ import de.gaming12846.trollplus.constants.LangConstants;
 import de.gaming12846.trollplus.listener.*;
 import de.gaming12846.trollplus.utils.ConfigHelper;
 import de.gaming12846.trollplus.utils.LoggingHelper;
+import de.gaming12846.trollplus.utils.RegionBlacklistHelper;
 import de.gaming12846.trollplus.utils.TabCompleter;
 import de.gaming12846.trollplus.utils.UpdateChecker;
 import org.bstats.bukkit.Metrics;
@@ -43,6 +44,7 @@ import java.util.Objects;
 // The main class for the TrollPlus plugin
 public class TrollPlus extends JavaPlugin {
     private final LoggingHelper loggingHelper = new LoggingHelper(this);
+    private final RegionBlacklistHelper regionBlacklistHelper = new RegionBlacklistHelper(this);
     public boolean updateAvailable = false;
     private double serverVersion;
 
@@ -145,6 +147,11 @@ public class TrollPlus extends JavaPlugin {
                 return configHelperLangEnglish;
             }
         }
+    }
+
+    // Retrieves the region blacklist helper
+    public RegionBlacklistHelper getRegionBlacklistHelper() {
+        return regionBlacklistHelper;
     }
 
     // Checks the server version for incompatibility

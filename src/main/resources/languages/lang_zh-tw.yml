@@ -38,12 +38,17 @@ trollplus:
   added-to-blocklist: "玩家 [player] 已被添加至黑名單中" # "[player]" 必須包含在信息內，因爲它會被替換成玩家的名稱
   not-in-blocklist: "玩家 [player] 不在黑名單中" # "[player]" 必須包含在信息內，因爲它會被替換成玩家的名稱
   removed-from-blocklist: "玩家 [player] 已從黑名單中移除" # "[player]" 必須包含在信息內，因爲它會被替換成玩家的名稱
+  already-in-region-blacklist: "Region [region] is already in the region blacklist." # [region] will be replaced by the region name.
+  added-to-region-blacklist: "Region [region] has been added to the region blacklist." # [region] will be replaced by the region name.
+  not-in-region-blacklist: "Region [region] is not in the region blacklist." # [region] will be replaced by the region name.
+  removed-from-region-blacklist: "Region [region] has been removed from the region blacklist." # [region] will be replaced by the region name.
 
 ######################### Troll 指令 ##########################
 
 troll:
   player-not-online: "玩家 [player] 目前不在線" # "[player]" 必須包含在信息內，因爲它會被替換成玩家的名稱
   player-is-immune: "玩家 [player] 當前處于受保護狀態中" # "[player]" 必須包含在信息內，因爲它會被替換成玩家的名稱
+  player-in-blacklisted-region: "Trolling is disabled because the target is in a blacklisted region."
   player-quit: "指定的玩家已經退出遊戲"
   vanish-not-available: "對不起，妳不能隱身自己"
   teleport-not-available: "做得很好，但妳已經處于自己的位置了 :)"

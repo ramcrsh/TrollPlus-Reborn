@@ -34,9 +34,14 @@ public class LangConstants {
     public static final String TROLLPLUS_ADDED_TO_BLOCKLIST = "trollplus.added-to-blocklist";
     public static final String TROLLPLUS_NOT_IN_BLOCKLIST = "trollplus.not-in-blocklist";
     public static final String TROLLPLUS_REMOVED_FROM_BLOCKLIST = "trollplus.removed-from-blocklist";
+    public static final String TROLLPLUS_ALREADY_IN_REGION_BLACKLIST = "trollplus.already-in-region-blacklist";
+    public static final String TROLLPLUS_ADDED_TO_REGION_BLACKLIST = "trollplus.added-to-region-blacklist";
+    public static final String TROLLPLUS_NOT_IN_REGION_BLACKLIST = "trollplus.not-in-region-blacklist";
+    public static final String TROLLPLUS_REMOVED_FROM_REGION_BLACKLIST = "trollplus.removed-from-region-blacklist";
     // Troll command
     public static final String TROLL_PLAYER_NOT_ONLINE = "troll.player-not-online";
     public static final String TROLL_PLAYER_IS_IMMUNE = "troll.player-is-immune";
+    public static final String TROLL_PLAYER_IN_BLACKLISTED_REGION = "troll.player-in-blacklisted-region";
     public static final String TROLL_PLAYER_QUIT = "troll.player-quit";
     public static final String TROLL_VANISH_NOT_AVAILABLE = "troll.vanish-not-available";
     public static final String TROLL_TELEPORT_NOT_AVAILABLE = "troll.teleport-not-available";

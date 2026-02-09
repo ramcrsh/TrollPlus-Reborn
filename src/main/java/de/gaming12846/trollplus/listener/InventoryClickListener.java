@@ -102,6 +102,11 @@ public class InventoryClickListener implements Listener {
             slot = slots[ThreadLocalRandom.current().nextInt(0, slots.length)];
         }
 
+        if (isTrollActionBlocked(target, slot)) {
+            player.sendMessage(LangConstants.PLUGIN_PREFIX + configHelperLanguage.getString(LangConstants.TROLL_PLAYER_IN_BLACKLISTED_REGION));
+            return;
+        }
+
         // Determine the action based on the clicked slot
         switch (slot) {
             case 11 -> handleFreezeFeature(target, configHelperLanguage);
@@ -150,6 +155,30 @@ public class InventoryClickListener implements Listener {
                 player.openInventory(Objects.requireNonNull(target.getPlayer()).getEnderChest());
             case 48 -> handleVanishFeature(player, target, configHelperLanguage);
         }
+    }
+
+    private boolean isTrollActionBlocked(Player target, int slot) {
+        if (!plugin.getRegionBlacklistHelper().isTargetInBlacklistedRegion(target)) {
+            return false;
+        }
+
+        return switch (slot) {
+            case 11 -> !target.hasMetadata(MetadataConstants.TROLLPLUS_FREEZE);
+            case 12 -> !target.hasMetadata(MetadataConstants.TROLLPLUS_HAND_ITEM_DROP);
+            case 13 -> !target.hasMetadata(MetadataConstants.TROLLPLUS_CONTROL_TARGET);
+            case 14 -> !target.hasMetadata(MetadataConstants.TROLLPLUS_FLIP_BEHIND);
+            case 15 -> !target.hasMetadata(MetadataConstants.TROLLPLUS_SPANK);
+            case 19 -> !target.hasMetadata(MetadataConstants.TROLLPLUS_SPAM_MESSAGES);
+            case 20 -> !target.hasMetadata(MetadataConstants.TROLLPLUS_SPAM_SOUNDS);
+            case 21 -> !target.hasMetadata(MetadataConstants.TROLLPLUS_SEMI_BAN);
+            case 22 -> !target.hasMetadata(MetadataConstants.TROLLPLUS_FALLING_ANVILS);
+            case 23 -> !target.hasMetadata(MetadataConstants.TROLLPLUS_TNT_TRACK);
+            case 24 -> !target.hasMetadata(MetadataConstants.TROLLPLUS_MOB_SPAWNER);
+            case 25 -> !target.hasMetadata(MetadataConstants.TROLLPLUS_SLOWLY_KILL);
+            case 28 -> !target.hasMetadata(MetadataConstants.TROLLPLUS_RANDOM_TELEPORT);
+            case 48 -> !target.hasMetadata(MetadataConstants.TROLLPLUS_VANISH);
+            default -> true;
+        };
     }
 
     // Handles the freeze feature, freezing or unfreezing the target player

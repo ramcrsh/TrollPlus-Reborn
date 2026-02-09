@@ -28,6 +28,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 // Handles the "trollplus" commands, the main commands for the plugin
@@ -47,7 +49,7 @@ public class TrollPlusCommand implements CommandExecutor {
 
         // Display usage information if no arguments are provided
         if (args.length == 0) {
-            sender.sendMessage(LangConstants.PLUGIN_PREFIX + ChatColor.RED + configHelperLanguage.getString(LangConstants.INVALID_SYNTAX) + " " + ChatColor.RESET + configHelperLanguage.getString(LangConstants.INVALID_SYNTAX_USAGE) + label + " <version|reload|blocklist|settings>");
+            sender.sendMessage(LangConstants.PLUGIN_PREFIX + ChatColor.RED + configHelperLanguage.getString(LangConstants.INVALID_SYNTAX) + " " + ChatColor.RESET + configHelperLanguage.getString(LangConstants.INVALID_SYNTAX_USAGE) + label + " <version|reload|blocklist|regionblacklist|settings>");
             return true;
         }
 
@@ -56,9 +58,10 @@ public class TrollPlusCommand implements CommandExecutor {
             case "version" -> handleVersionSubcommand(sender, label, args, configHelperLanguage);
             case "reload" -> handleReloadSubcommand(sender, label, args, configHelperLanguage);
             case "blocklist" -> handleBlocklistSubcommand(sender, label, args, configHelperLanguage);
+            case "regionblacklist" -> handleRegionBlacklistSubcommand(sender, label, args, configHelperLanguage);
             case "settings" -> handleSettingsSubcommand(sender, args, configHelperLanguage);
             default ->
-                    sender.sendMessage(LangConstants.PLUGIN_PREFIX + ChatColor.RED + configHelperLanguage.getString(LangConstants.INVALID_SYNTAX) + " " + ChatColor.RESET + configHelperLanguage.getString(LangConstants.INVALID_SYNTAX_USAGE) + " " + label + " <version|reload|blocklist|settings>");
+                    sender.sendMessage(LangConstants.PLUGIN_PREFIX + ChatColor.RED + configHelperLanguage.getString(LangConstants.INVALID_SYNTAX) + " " + ChatColor.RESET + configHelperLanguage.getString(LangConstants.INVALID_SYNTAX_USAGE) + " " + label + " <version|reload|blocklist|regionblacklist|settings>");
         }
 
         return true;
@@ -221,6 +224,85 @@ public class TrollPlusCommand implements CommandExecutor {
             configHelperBlocklist.saveConfig();
             configHelperBlocklist.loadConfig();
         }
+    }
+
+    // Handles the "regionblacklist" subcommand to manage the region blacklist
+    private void handleRegionBlacklistSubcommand(CommandSender sender, String label, String[] args, ConfigHelper configHelperLanguage) {
+        if (!sender.hasPermission(PermissionConstants.PERMISSION_TROLLPLUS_REGION_BLACKLIST_ADD) && !sender.hasPermission(PermissionConstants.PERMISSION_TROLLPLUS_REGION_BLACKLIST_REMOVE)) {
+            sender.sendMessage(ChatColor.RED + configHelperLanguage.getString(LangConstants.NO_PERMISSION));
+            return;
+        }
+
+        if (args.length < 2) {
+            sender.sendMessage(LangConstants.PLUGIN_PREFIX + ChatColor.RED + configHelperLanguage.getString(LangConstants.INVALID_SYNTAX) + " " + ChatColor.RESET + configHelperLanguage.getString(LangConstants.INVALID_SYNTAX) + " " + label + " regionblacklist <add|remove>");
+            return;
+        }
+
+        ConfigHelper configHelper = plugin.getConfigHelper();
+
+        switch (args[1].toLowerCase()) {
+            case "add" -> handleRegionBlacklistAddSubcommand(sender, args, configHelper, configHelperLanguage);
+            case "remove" -> handleRegionBlacklistRemoveSubcommand(sender, args, configHelper, configHelperLanguage);
+            default ->
+                    sender.sendMessage(LangConstants.PLUGIN_PREFIX + ChatColor.RED + configHelperLanguage.getString(LangConstants.INVALID_SYNTAX) + " " + ChatColor.RESET + configHelperLanguage.getString(LangConstants.INVALID_SYNTAX) + " " + label + " regionblacklist <add|remove>");
+        }
+    }
+
+    private void handleRegionBlacklistAddSubcommand(CommandSender sender, String[] args, ConfigHelper configHelper, ConfigHelper configHelperLanguage) {
+        if (!sender.hasPermission(PermissionConstants.PERMISSION_TROLLPLUS_REGION_BLACKLIST_ADD)) {
+            sender.sendMessage(ChatColor.RED + configHelperLanguage.getString(LangConstants.NO_PERMISSION));
+            return;
+        }
+
+        if (args.length != 3) {
+            sender.sendMessage(LangConstants.PLUGIN_PREFIX + ChatColor.RED + configHelperLanguage.getString(LangConstants.INVALID_SYNTAX) + " " + ChatColor.RESET + configHelperLanguage.getString(LangConstants.INVALID_SYNTAX) + " " + "regionblacklist add <region>");
+            return;
+        }
+
+        String regionName = args[2].toLowerCase(Locale.ROOT);
+        List<String> regionBlacklist = new java.util.ArrayList<>(configHelper.getStringList(ConfigConstants.REGION_BLACKLIST));
+
+        if (regionBlacklist.contains(regionName)) {
+            String message = LangConstants.PLUGIN_PREFIX + configHelperLanguage.getString(LangConstants.TROLLPLUS_ALREADY_IN_REGION_BLACKLIST);
+            sender.sendMessage(message.replace("[region]", ChatColor.RED + ChatColor.BOLD.toString() + args[2] + ChatColor.RESET));
+            return;
+        }
+
+        regionBlacklist.add(regionName);
+        configHelper.set(ConfigConstants.REGION_BLACKLIST, regionBlacklist);
+        String message = LangConstants.PLUGIN_PREFIX + configHelperLanguage.getString(LangConstants.TROLLPLUS_ADDED_TO_REGION_BLACKLIST);
+        sender.sendMessage(message.replace("[region]", ChatColor.RED + ChatColor.BOLD.toString() + args[2] + ChatColor.RESET));
+
+        configHelper.saveConfig();
+        configHelper.loadConfig();
+    }
+
+    private void handleRegionBlacklistRemoveSubcommand(CommandSender sender, String[] args, ConfigHelper configHelper, ConfigHelper configHelperLanguage) {
+        if (!sender.hasPermission(PermissionConstants.PERMISSION_TROLLPLUS_REGION_BLACKLIST_REMOVE)) {
+            sender.sendMessage(ChatColor.RED + configHelperLanguage.getString(LangConstants.NO_PERMISSION));
+            return;
+        }
+
+        if (args.length != 3) {
+            sender.sendMessage(LangConstants.PLUGIN_PREFIX + ChatColor.RED + configHelperLanguage.getString(LangConstants.INVALID_SYNTAX) + " " + ChatColor.RESET + configHelperLanguage.getString(LangConstants.INVALID_SYNTAX) + " " + "regionblacklist remove <region>");
+            return;
+        }
+
+        String regionName = args[2].toLowerCase(Locale.ROOT);
+        List<String> regionBlacklist = new java.util.ArrayList<>(configHelper.getStringList(ConfigConstants.REGION_BLACKLIST));
+
+        if (!regionBlacklist.remove(regionName)) {
+            String message = LangConstants.PLUGIN_PREFIX + configHelperLanguage.getString(LangConstants.TROLLPLUS_NOT_IN_REGION_BLACKLIST);
+            sender.sendMessage(message.replace("[region]", ChatColor.RED + ChatColor.BOLD.toString() + args[2] + ChatColor.RESET));
+            return;
+        }
+
+        configHelper.set(ConfigConstants.REGION_BLACKLIST, regionBlacklist);
+        String message = LangConstants.PLUGIN_PREFIX + configHelperLanguage.getString(LangConstants.TROLLPLUS_REMOVED_FROM_REGION_BLACKLIST);
+        sender.sendMessage(message.replace("[region]", ChatColor.RED + ChatColor.BOLD.toString() + args[2] + ChatColor.RESET));
+
+        configHelper.saveConfig();
+        configHelper.loadConfig();
     }
 
     // Method for retrieving the UUID of an offline player with the Mojang api

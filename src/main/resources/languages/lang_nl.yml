@@ -37,12 +37,17 @@ trollplus:
   added-to-blocklist: "Speler [player] is toegevoegd aan de blokkeerlijst." # [player] wordt vervangen door de naam van de speler.
   not-in-blocklist: "Speler [player] staat niet op de blokkeerlijst." # [player] wordt vervangen door de naam van de speler.
   removed-from-blocklist: "Speler [player] is verwijderd van de blokkeerlijst." # [player] wordt vervangen door de naam van de speler.
+  already-in-region-blacklist: "Region [region] is already in the region blacklist." # [region] will be replaced by the region name.
+  added-to-region-blacklist: "Region [region] has been added to the region blacklist." # [region] will be replaced by the region name.
+  not-in-region-blacklist: "Region [region] is not in the region blacklist." # [region] will be replaced by the region name.
+  removed-from-region-blacklist: "Region [region] has been removed from the region blacklist." # [region] will be replaced by the region name.
 
 ###################### Troll Commando #######################
 
 troll:
   player-not-online: "Speler [player] is momenteel niet online." # [player] wordt vervangen door de naam van de speler.
   player-is-immune: "Speler [player] is immuun." # [player] wordt vervangen door de naam van de speler.
+  player-in-blacklisted-region: "Trolling is disabled because the target is in a blacklisted region."
   player-quit: "De geselecteerde speler heeft het spel verlaten."
   vanish-not-available: "Je kunt niet uit jezelf verdwijnen."
   teleport-not-available: "Je bent al op je startpositie."
