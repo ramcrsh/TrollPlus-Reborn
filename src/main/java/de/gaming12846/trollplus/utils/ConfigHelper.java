@@ -12,6 +12,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 
@@ -103,13 +106,30 @@ public class ConfigHelper {
 
         // If the list is empty, replace it with the default value
         if (list.isEmpty()) {
-            // Load the default config from the plugin's jar
-            FileConfiguration defaultConfig = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), path));
+            // Load the default config from the plugin's jar only when the path is missing
+            if (!fileConfiguration.contains(path)) {
+                FileConfiguration defaultConfig = loadDefaultConfig();
+                if (defaultConfig != null && defaultConfig.contains(path)) {
+                    return defaultConfig.getStringList(path);
+                }
+            }
 
-            // Return the default list or a single-item list indicating the path wasn't found
-            return defaultConfig.getStringList(path).isEmpty() ? Collections.singletonList("List not found: " + path) : defaultConfig.getStringList(path);
+            return Collections.emptyList();
         }
 
         return list;
+    }
+
+    private FileConfiguration loadDefaultConfig() {
+        try (InputStream inputStream = plugin.getResource(this.path)) {
+            if (inputStream == null) {
+                return null;
+            }
+
+            return YamlConfiguration.loadConfiguration(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            plugin.getLoggingHelper().error(plugin.getConfigHelperLanguage().getString(LangConstants.FAILED_TO_SAVE_CONFIG) + " " + e);
+            return null;
+        }
     }
 }
