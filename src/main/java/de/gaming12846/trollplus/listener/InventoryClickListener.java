@@ -443,7 +443,18 @@ public class InventoryClickListener implements Listener {
                 Location loc = target.getLocation().add(0, 3, 0);
 
                 // Check if the location above is clear and set an anvil block
-                if (loc.getBlock().getType() == Material.AIR) loc.getBlock().setType(Material.DAMAGED_ANVIL);
+                if (loc.getBlock().getType() == Material.AIR) {
+                    loc.getBlock().setType(Material.DAMAGED_ANVIL);
+                    Location anvilLocation = loc.getBlock().getLocation();
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            if (anvilLocation.getBlock().getType() == Material.DAMAGED_ANVIL) {
+                                anvilLocation.getBlock().setType(Material.AIR);
+                            }
+                        }
+                    }.runTaskLater(plugin, 100);
+                }
             }
         }.runTaskTimer(plugin, 0, plugin.getConfigHelper().getInt(ConfigConstants.FALLING_ANVILS_PERIOD));
     }
