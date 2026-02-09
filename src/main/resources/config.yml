@@ -79,6 +79,8 @@ semi-ban-message-replace: "<[player]>" # The "[player]" tag will be replaced wit
 # Falling Anvils Feature
 # Period in ticks between each falling anvil. [Default: 20]
 falling-anvils-period: 20
+# Delay in ticks before a falling anvil block is removed after landing. [Default: 100]
+falling-anvils-remove-delay: 100
 
 # TNT Track Feature
 # Period in ticks between each TNT event. [Default: 20]
