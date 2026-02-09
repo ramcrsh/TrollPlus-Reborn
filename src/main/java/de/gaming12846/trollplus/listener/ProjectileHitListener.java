@@ -8,6 +8,7 @@ package de.gaming12846.trollplus.listener;
 import de.gaming12846.trollplus.TrollPlus;
 import de.gaming12846.trollplus.constants.ConfigConstants;
 import de.gaming12846.trollplus.constants.MetadataConstants;
+import de.gaming12846.trollplus.utils.PotionEffectHelper;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -22,6 +23,8 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 // Listener for handling events when projectiles hit entities or blocks
@@ -105,13 +108,26 @@ public class ProjectileHitListener implements Listener {
     // Handles the potion effect arrow effect
     private void handlePotionEffectArrow(Arrow arrow) {
         arrow.removeMetadata(MetadataConstants.TROLLPLUS_TROLLBOWS_POTION_EFFECT_ARROW, plugin);
-        PotionEffectType[] possibleEffects = {PotionEffectType.SLOWNESS, PotionEffectType.MINING_FATIGUE, PotionEffectType.NAUSEA, PotionEffectType.BLINDNESS, PotionEffectType.HUNGER, PotionEffectType.WEAKNESS, PotionEffectType.POISON, PotionEffectType.WITHER, PotionEffectType.LEVITATION};
+        List<PotionEffectType> possibleEffects = new ArrayList<>();
+        PotionEffectType slownessEffect = PotionEffectHelper.getSlownessEffectType();
+        if (slownessEffect != null) {
+            possibleEffects.add(slownessEffect);
+        }
+        possibleEffects.add(PotionEffectType.MINING_FATIGUE);
+        possibleEffects.add(PotionEffectType.NAUSEA);
+        possibleEffects.add(PotionEffectType.BLINDNESS);
+        possibleEffects.add(PotionEffectType.HUNGER);
+        possibleEffects.add(PotionEffectType.WEAKNESS);
+        possibleEffects.add(PotionEffectType.POISON);
+        possibleEffects.add(PotionEffectType.WITHER);
+        possibleEffects.add(PotionEffectType.LEVITATION);
 
         // Create a splash potion with the random effect
         ItemStack itemStack = new ItemStack(Material.SPLASH_POTION);
         PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
         if (potionMeta != null) {
-            potionMeta.addCustomEffect(new PotionEffect(possibleEffects[ThreadLocalRandom.current().nextInt(0, 8)], 200, 1), true);
+            PotionEffectType selectedEffect = possibleEffects.get(ThreadLocalRandom.current().nextInt(0, possibleEffects.size()));
+            potionMeta.addCustomEffect(new PotionEffect(selectedEffect, 200, 1), true);
             itemStack.setItemMeta(potionMeta);
             ThrownPotion thrownPotion = (ThrownPotion) arrow.getWorld().spawnEntity(arrow.getLocation(), EntityType.POTION);
             thrownPotion.setItem(itemStack);

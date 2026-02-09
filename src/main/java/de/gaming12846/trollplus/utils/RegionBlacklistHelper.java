@@ -87,11 +87,7 @@ public class RegionBlacklistHelper {
             }
 
             Location location = target.getLocation();
-            Class<?> blockVectorClass = Class.forName("com.sk89q.worldedit.math.BlockVector3");
-            Object blockVector = blockVectorClass.getMethod("at", double.class, double.class, double.class)
-                    .invoke(null, location.getX(), location.getY(), location.getZ());
-
-            Object applicableRegions = regionManager.getClass().getMethod("getApplicableRegions", blockVectorClass).invoke(regionManager, blockVector);
+            Object applicableRegions = getApplicableRegions(regionManager, location);
             Set<?> regions = (Set<?>) applicableRegions.getClass().getMethod("getRegions").invoke(applicableRegions);
 
             for (Object region : regions) {
@@ -105,5 +101,33 @@ public class RegionBlacklistHelper {
         }
 
         return false;
+    }
+
+    private Object getApplicableRegions(Object regionManager, Location location) throws ReflectiveOperationException {
+        Class<?> blockVectorClass = Class.forName("com.sk89q.worldedit.math.BlockVector3");
+        Object blockVector = createBlockVector(blockVectorClass, location);
+
+        try {
+            return regionManager.getClass().getMethod("getApplicableRegions", blockVectorClass).invoke(regionManager, blockVector);
+        } catch (NoSuchMethodException e) {
+            return getApplicableRegionsByLocation(regionManager, location);
+        }
+    }
+
+    private Object createBlockVector(Class<?> blockVectorClass, Location location) throws ReflectiveOperationException {
+        try {
+            return blockVectorClass.getMethod("at", int.class, int.class, int.class)
+                    .invoke(null, location.getBlockX(), location.getBlockY(), location.getBlockZ());
+        } catch (NoSuchMethodException e) {
+            return blockVectorClass.getMethod("at", double.class, double.class, double.class)
+                    .invoke(null, location.getX(), location.getY(), location.getZ());
+        }
+    }
+
+    private Object getApplicableRegionsByLocation(Object regionManager, Location location) throws ReflectiveOperationException {
+        Class<?> bukkitAdapterClass = Class.forName("com.sk89q.worldguard.bukkit.BukkitAdapter");
+        Object adaptedLocation = bukkitAdapterClass.getMethod("adapt", Location.class).invoke(null, location);
+        Class<?> worldEditLocationClass = Class.forName("com.sk89q.worldedit.util.Location");
+        return regionManager.getClass().getMethod("getApplicableRegions", worldEditLocationClass).invoke(regionManager, adaptedLocation);
     }
 }

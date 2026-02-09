@@ -13,6 +13,7 @@ import de.gaming12846.trollplus.utils.ConfigHelper;
 import de.gaming12846.trollplus.utils.ControlHelper;
 import de.gaming12846.trollplus.utils.GUIHelper;
 import de.gaming12846.trollplus.utils.ItemBuilder;
+import de.gaming12846.trollplus.utils.PotionEffectHelper;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -184,13 +185,17 @@ public class InventoryClickListener implements Listener {
     // Handles the freeze feature, freezing or unfreezing the target player
     private void handleFreezeFeature(Player target, ConfigHelper configHelperLanguage) {
         double serverVersion = plugin.getServerVersion();
+        PotionEffectType slownessEffect = PotionEffectHelper.getSlownessEffectType();
         if (!target.hasMetadata(MetadataConstants.TROLLPLUS_FREEZE)) {
             target.setMetadata(MetadataConstants.TROLLPLUS_FREEZE, new FixedMetadataValue(plugin, target.getName()));
-            if (serverVersion > 1.19)
-                target.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, Integer.MAX_VALUE, 6));
+            if (serverVersion > 1.19 && slownessEffect != null) {
+                target.addPotionEffect(new PotionEffect(slownessEffect, Integer.MAX_VALUE, 6));
+            }
         } else {
             target.removeMetadata(MetadataConstants.TROLLPLUS_FREEZE, plugin);
-            if (serverVersion > 1.19) target.removePotionEffect(PotionEffectType.SLOWNESS);
+            if (serverVersion > 1.19 && slownessEffect != null) {
+                target.removePotionEffect(slownessEffect);
+            }
         }
 
         updateGUIHelperTroll(11, Material.BLUE_ICE, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_FREEZE), MetadataConstants.TROLLPLUS_FREEZE, configHelperLanguage.getString(LangConstants.TROLL_GUI_FREEZE_DESCRIPTION));
