@@ -10,6 +10,8 @@ public class PermissionConstants {
     public static final String PERMISSION_TROLLPLUS_RELOAD = "trollplus.reload";
     public static final String PERMISSION_TROLLPLUS_BLOCKLIST_ADD = "trollplus.blocklist.add";
     public static final String PERMISSION_TROLLPLUS_BLOCKLIST_REMOVE = "trollplus.blocklist.remove";
+    public static final String PERMISSION_TROLLPLUS_REGION_BLACKLIST_ADD = "trollplus.regionblacklist.add";
+    public static final String PERMISSION_TROLLPLUS_REGION_BLACKLIST_REMOVE = "trollplus.regionblacklist.remove";
     public static final String PERMISSION_TROLLPLUS_SETTINGS = "trollplus.settings";
     public static final String PERMISSION_TROLLPLUS_TROLL = "trollplus.troll";
     public static final String PERMISSION_TROLLPLUS_BOWS = "trollplus.bows";

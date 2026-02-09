@@ -37,12 +37,17 @@ trollplus:
   added-to-blocklist: "Le joueur [player] a été ajouté à la liste noire." # [player] sera remplacé par le nom du joueur.
   not-in-blocklist: "Le joueur [player] n'est pas dans la liste noire." # [player] sera remplacé par le nom du joueur.
   removed-from-blocklist: "Le joueur [player] a été retiré de la liste noire." # [player] sera remplacé par le nom du joueur.
+  already-in-region-blacklist: "Region [region] is already in the region blacklist." # [region] will be replaced by the region name.
+  added-to-region-blacklist: "Region [region] has been added to the region blacklist." # [region] will be replaced by the region name.
+  not-in-region-blacklist: "Region [region] is not in the region blacklist." # [region] will be replaced by the region name.
+  removed-from-region-blacklist: "Region [region] has been removed from the region blacklist." # [region] will be replaced by the region name.
 
 ###################### Commande Troll #######################
 
 troll:
   player-not-online: "Le joueur [player] n'est pas actuellement en ligne." # [player] sera remplacé par le nom du joueur.
   player-is-immune: "Le joueur [player] est immunisé." # [player] sera remplacé par le nom du joueur.
+  player-in-blacklisted-region: "Trolling is disabled because the target is in a blacklisted region."
   player-quit: "Le joueur sélectionné a quitté le jeu."
   vanish-not-available: "Vous ne pouvez pas disparaître de vous-même."
   teleport-not-available: "Vous êtes déjà à votre position de départ."

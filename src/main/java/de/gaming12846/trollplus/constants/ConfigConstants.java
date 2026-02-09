@@ -12,6 +12,7 @@ public class ConfigConstants {
     public static final String METRICS_ENABLED = "metrics-enabled";
     public static final String CHECK_FOR_UPDATES = "check-for-updates";
     public static final String LOG_LEVEL = "log-level";
+    public static final String REGION_BLACKLIST = "region-blacklist";
     // Feature settings
     public static final String DEACTIVATE_FEATURES_ON_QUIT = "deactivate-features-on-quit";
     public static final String SET_FIRE = "set-fire";

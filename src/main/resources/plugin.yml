@@ -6,11 +6,12 @@ prefix: TrollPlus
 authors: [ Gaming12846 ]
 description: Prank and trick other players to make their Minecraft experience both fun and surprising!
 website: https://github.com/Gaming12846/TrollPlus
+softdepend: [WorldGuard]
 
 commands:
   trollplus:
     description: Main command for TrollPlus, used for version info, reloading, and settings.
-    usage: /<command> [version|reload|blocklist|settings]
+    usage: /<command> [version|reload|blocklist|regionblacklist|settings]
     aliases: [ troll+ ]
 
   troll:
@@ -30,6 +31,7 @@ permissions:
       trollplus.version: true
       trollplus.reload: true
       trollplus.blocklist.*: true
+      trollplus.regionblacklist.*: true
       trollplus.settings: true
       trollplus.troll: true
       trollplus.bows: true
@@ -55,6 +57,21 @@ permissions:
 
   trollplus.blocklist.remove:
     description: Grants access to the /trollplus blocklist remove subcommand.
+    default: op
+
+  trollplus.regionblacklist.*:
+    description: Grants access to all /trollplus regionblacklist subcommands.
+    default: op
+    children:
+      trollplus.regionblacklist.add: true
+      trollplus.regionblacklist.remove: true
+
+  trollplus.regionblacklist.add:
+    description: Grants access to the /trollplus regionblacklist add subcommand.
+    default: op
+
+  trollplus.regionblacklist.remove:
+    description: Grants access to the /trollplus regionblacklist remove subcommand.
     default: op
 
   trollplus.settings:

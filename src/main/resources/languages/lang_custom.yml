@@ -39,12 +39,17 @@ trollplus:
   added-to-blocklist: "[player]" # [player] will be replaced by the player's name.
   not-in-blocklist: "[player]" # [player] will be replaced by the player's name.
   removed-from-blocklist: "[player]"  # [player] will be replaced by the player's name.
+  already-in-region-blacklist: "[region]" # [region] will be replaced by the region name.
+  added-to-region-blacklist: "[region]" # [region] will be replaced by the region name.
+  not-in-region-blacklist: "[region]" # [region] will be replaced by the region name.
+  removed-from-region-blacklist: "[region]" # [region] will be replaced by the region name.
 
 ####################### Troll command #######################
 
 troll:
   player-not-online: "[player]" # [player] will be replaced by the player's name.
   player-is-immune: "[player]" # [player] will be replaced by the player's name.
+  player-in-blacklisted-region: ""
   player-quit: ""
   vanish-not-available: ""
   teleport-not-available: ""

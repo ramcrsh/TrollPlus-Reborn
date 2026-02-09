@@ -67,6 +67,11 @@ public class TrollCommand implements CommandExecutor {
             return true;
         }
 
+        if (plugin.getRegionBlacklistHelper().isTargetInBlacklistedRegion(target)) {
+            player.sendMessage(LangConstants.PLUGIN_PREFIX + configHelperLanguage.getString(LangConstants.TROLL_PLAYER_IN_BLACKLISTED_REGION));
+            return true;
+        }
+
         // Creates the Troll GUI for the player
         createTrollGUI(target, configHelperLanguage);
 
