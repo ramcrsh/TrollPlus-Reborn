@@ -60,7 +60,7 @@ tasks.withType(JavaCompile).configureEach {
 
 // Configure the shadow JAR task
 tasks.named('shadowJar') {
-    archiveClassifier.set('shadowJar')
+    archiveClassifier.set('')
 
     // Relocate package to avoid conflicts, if needed
     relocate('org.bstats', 'de.gaming12846.trollplus.metrics')
@@ -76,6 +76,11 @@ tasks.named('shadowJar') {
                 'Main-Class': 'de.gaming12846.trollplus'
         )
     }
+}
+
+// Disable the standard JAR so the shaded artifact is the default output
+tasks.jar {
+    enabled = false
 }
 
 // Ensure the shadow JAR is built as part of the 'build' task
