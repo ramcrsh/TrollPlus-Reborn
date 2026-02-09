@@ -18,6 +18,7 @@ public class MetadataConstants {
     public static final String TROLLPLUS_SPAM_SOUNDS = "TROLLPLUS_SPAM_SOUNDS";
     public static final String TROLLPLUS_SEMI_BAN = "TROLLPLUS_SEMI_BAN";
     public static final String TROLLPLUS_FALLING_ANVILS = "TROLLPLUS_FALLING_ANVILS";
+    public static final String TROLLPLUS_FALLING_ANVIL_ENTITY = "TROLLPLUS_FALLING_ANVIL_ENTITY";
     public static final String TROLLPLUS_TNT_TRACK = "TROLLPLUS_TNT_TRACK";
     public static final String TROLLPLUS_MOB_SPAWNER = "TROLLPLUS_MOB_SPAWNER";
     public static final String TROLLPLUS_SLOWLY_KILL = "TROLLPLUS_SLOWLY_KILL";

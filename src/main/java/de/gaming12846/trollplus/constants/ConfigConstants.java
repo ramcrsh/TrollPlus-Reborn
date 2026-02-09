@@ -28,6 +28,7 @@ public class ConfigConstants {
     public static final String SPAM_SOUNDS_PERIOD = "spam-sounds-period";
     public static final String SEMI_BAN_MESSAGE_REPLACE = "semi-ban-message-replace";
     public static final String FALLING_ANVILS_PERIOD = "falling-anvils-period";
+    public static final String FALLING_ANVILS_REMOVE_DELAY = "falling-anvils-remove-delay";
     public static final String TNT_TRACK_PERIOD = "tnt-track-period";
     public static final String MOB_SPAWNER_PERIOD = "mob-spawner-period";
     public static final String SLOWLY_KILL_PERIOD = "slowly-kill-period";

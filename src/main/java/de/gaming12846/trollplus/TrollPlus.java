@@ -180,6 +180,7 @@ public class TrollPlus extends JavaPlugin {
 
         pluginManager.registerEvents(new AsyncPlayerChatListener(this), this);
         pluginManager.registerEvents(new BlockIgniteListener(this), this);
+        pluginManager.registerEvents(new EntityChangeBlockListener(this), this);
         pluginManager.registerEvents(new EntityDamageByEntityListener(), this);
         pluginManager.registerEvents(new EntityDamageListener(this), this);
         pluginManager.registerEvents(new EntityExplodeListener(this), this);

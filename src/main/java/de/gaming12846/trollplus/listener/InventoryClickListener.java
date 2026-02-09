@@ -17,6 +17,7 @@ import de.gaming12846.trollplus.utils.PotionEffectHelper;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
@@ -444,16 +445,10 @@ public class InventoryClickListener implements Listener {
 
                 // Check if the location above is clear and set an anvil block
                 if (loc.getBlock().getType() == Material.AIR) {
-                    loc.getBlock().setType(Material.DAMAGED_ANVIL);
-                    Location anvilLocation = loc.getBlock().getLocation();
-                    new BukkitRunnable() {
-                        @Override
-                        public void run() {
-                            if (anvilLocation.getBlock().getType() == Material.DAMAGED_ANVIL) {
-                                anvilLocation.getBlock().setType(Material.AIR);
-                            }
-                        }
-                    }.runTaskLater(plugin, 100);
+                    FallingBlock fallingBlock = loc.getWorld().spawnFallingBlock(loc, Material.DAMAGED_ANVIL.createBlockData());
+                    fallingBlock.setDropItem(false);
+                    fallingBlock.setHurtEntities(true);
+                    fallingBlock.setMetadata(MetadataConstants.TROLLPLUS_FALLING_ANVIL_ENTITY, new FixedMetadataValue(plugin, true));
                 }
             }
         }.runTaskTimer(plugin, 0, plugin.getConfigHelper().getInt(ConfigConstants.FALLING_ANVILS_PERIOD));
