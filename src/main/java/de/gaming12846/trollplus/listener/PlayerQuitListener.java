@@ -8,12 +8,12 @@ package de.gaming12846.trollplus.listener;
 import de.gaming12846.trollplus.TrollPlus;
 import de.gaming12846.trollplus.constants.ConfigConstants;
 import de.gaming12846.trollplus.constants.MetadataConstants;
+import de.gaming12846.trollplus.utils.PotionEffectHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.potion.PotionEffectType;
 
 // Listener for handling player quit events
 public class PlayerQuitListener implements Listener {
@@ -40,7 +40,12 @@ public class PlayerQuitListener implements Listener {
             }
 
             // Remove any active slowness potion effects
-            if (plugin.getServerVersion() > 1.19) player.removePotionEffect(PotionEffectType.SLOWNESS);
+            if (plugin.getServerVersion() > 1.19) {
+                var slownessEffect = PotionEffectHelper.getSlownessEffectType();
+                if (slownessEffect != null) {
+                    player.removePotionEffect(slownessEffect);
+                }
+            }
         }
     }
 
