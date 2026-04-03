@@ -6,6 +6,7 @@
 package de.gaming12846.trollplus.commands;
 
 import de.gaming12846.trollplus.TrollPlus;
+import de.gaming12846.trollplus.constants.ConfigConstants;
 import de.gaming12846.trollplus.constants.LangConstants;
 import de.gaming12846.trollplus.constants.MetadataConstants;
 import de.gaming12846.trollplus.constants.PermissionConstants;
@@ -82,38 +83,90 @@ public class TrollCommand implements CommandExecutor {
 
     // Creates the Troll GUI for the player
     private void createTrollGUI(Player target, ConfigHelper configHelperLanguage) {
+        ConfigHelper configHelper = plugin.getConfigHelper();
         guiHelperTroll = new GUIHelper(ChatColor.BLACK + configHelperLanguage.getString(LangConstants.TROLL_GUI_TITLE) + " " + ChatColor.DARK_RED + target.getName(), 54, target, plugin);
 
         // Add the available trolling options to the GUI
         getGUIHelperTroll().addItem(4, ItemBuilder.createSkull(ChatColor.GOLD + target.getName(), target.getPlayer()));
 
-        getGUIHelperTroll().addItemWithLoreAndStatus(11, Material.BLUE_ICE, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_FREEZE), MetadataConstants.TROLLPLUS_FREEZE, configHelperLanguage.getString(LangConstants.TROLL_GUI_FREEZE_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLoreAndStatus(12, Material.SHEARS, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_HAND_ITEM_DROP), MetadataConstants.TROLLPLUS_HAND_ITEM_DROP, configHelperLanguage.getString(LangConstants.TROLL_GUI_HAND_ITEM_DROP_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLoreAndStatus(13, Material.LEAD, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_CONTROL), MetadataConstants.TROLLPLUS_CONTROL_TARGET, configHelperLanguage.getString(LangConstants.TROLL_GUI_CONTROL_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLoreAndStatus(14, Material.COMPASS, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_FLIP_BACKWARDS), MetadataConstants.TROLLPLUS_FLIP_BEHIND, configHelperLanguage.getString(LangConstants.TROLL_GUI_FLIP_BACKWARDS_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLoreAndStatus(15, Material.SLIME_BALL, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_SPANK), MetadataConstants.TROLLPLUS_SPANK, configHelperLanguage.getString(LangConstants.TROLL_GUI_SPANK_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLoreAndStatus(19, Material.WRITABLE_BOOK, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_SPAM_MESSAGES), MetadataConstants.TROLLPLUS_SPAM_MESSAGES, configHelperLanguage.getString(LangConstants.TROLL_GUI_SPAM_MESSAGES_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLoreAndStatus(20, Material.NOTE_BLOCK, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_SPAM_SOUNDS), MetadataConstants.TROLLPLUS_SPAM_SOUNDS, configHelperLanguage.getString(LangConstants.TROLL_GUI_SPAM_SOUNDS_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLoreAndStatus(21, Material.TRIPWIRE_HOOK, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_SEMI_BAN), MetadataConstants.TROLLPLUS_SEMI_BAN, configHelperLanguage.getString(LangConstants.TROLL_GUI_SEMI_BAN_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLoreAndStatus(22, Material.ANVIL, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_FALLING_ANVILS), MetadataConstants.TROLLPLUS_FALLING_ANVILS, configHelperLanguage.getString(LangConstants.TROLL_GUI_FALLING_ANVILS_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLoreAndStatus(23, Material.TNT, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_TNT_TRACK), MetadataConstants.TROLLPLUS_TNT_TRACK, configHelperLanguage.getString(LangConstants.TROLL_GUI_TNT_TRACK_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLoreAndStatus(24, Material.SPAWNER, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_MOB_SPAWNER), MetadataConstants.TROLLPLUS_MOB_SPAWNER, configHelperLanguage.getString(LangConstants.TROLL_GUI_MOB_SPAWNER_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLoreAndStatus(25, Material.SKELETON_SKULL, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_SLOWLY_KILL), MetadataConstants.TROLLPLUS_SLOWLY_KILL, configHelperLanguage.getString(LangConstants.TROLL_GUI_SLOWLY_KILL_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLoreAndStatus(28, Material.ENDER_EYE, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_RANDOM_TELEPORT), MetadataConstants.TROLLPLUS_RANDOM_TELEPORT, configHelperLanguage.getString(LangConstants.TROLL_GUI_RANDOM_TELEPORT_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLore(33, Material.EGG, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_INVENTORY_DROP), configHelperLanguage.getString(LangConstants.TROLL_GUI_INVENTORY_DROP_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLore(34, Material.BARREL, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_INVENTORY_SHUFFLE), configHelperLanguage.getString(LangConstants.TROLL_GUI_INVENTORY_SHUFFLE_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLore(38, Material.MUSIC_DISC_11, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_RANDOM_SCARY_SOUND), configHelperLanguage.getString(LangConstants.TROLL_GUI_RANDOM_SCARY_SOUND_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLore(39, Material.FIREWORK_ROCKET, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_ROCKET), configHelperLanguage.getString(LangConstants.TROLL_GUI_ROCKET_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLore(40, Material.FEATHER, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_FREEFALL), configHelperLanguage.getString(LangConstants.TROLL_GUI_FREEFALL_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLore(41, Material.PAPER, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_FAKE_BAN), configHelperLanguage.getString(LangConstants.TROLL_GUI_FAKE_BAN_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLore(42, Material.ENCHANTED_GOLDEN_APPLE, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_FAKE_OP), configHelperLanguage.getString(LangConstants.TROLL_GUI_FAKE_OP_DESCRIPTION));
-
-        getGUIHelperTroll().addItemWithLore(18, Material.ENDER_PEARL, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_TELEPORT), configHelperLanguage.getString(LangConstants.TROLL_GUI_TELEPORT_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLore(26, Material.CHEST, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_INVSEE), configHelperLanguage.getString(LangConstants.TROLL_GUI_INVSEE_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLore(27, Material.WITHER_SKELETON_SKULL, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_KILL), configHelperLanguage.getString(LangConstants.TROLL_GUI_KILL_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLore(35, Material.ENDER_CHEST, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_INVSEE_ENDER_CHEST), configHelperLanguage.getString(LangConstants.TROLL_GUI_INVSEE_ENDER_CHEST_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLoreAndStatus(48, Material.POTION, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_VANISH), MetadataConstants.TROLLPLUS_VANISH, configHelperLanguage.getString(LangConstants.TROLL_GUI_VANISH_DESCRIPTION));
-        getGUIHelperTroll().addItemWithLore(50, Material.CHORUS_FRUIT, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_RANDOM_TROLL), configHelperLanguage.getString(LangConstants.TROLL_GUI_RANDOM_TROLL_DESCRIPTION));
+        if (configHelper.getBoolean(ConfigConstants.FREEZE_ENABLED)) {
+            getGUIHelperTroll().addItemWithLoreAndStatus(11, Material.BLUE_ICE, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_FREEZE), MetadataConstants.TROLLPLUS_FREEZE, configHelperLanguage.getString(LangConstants.TROLL_GUI_FREEZE_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.HAND_ITEM_DROP_ENABLED)) {
+            getGUIHelperTroll().addItemWithLoreAndStatus(12, Material.SHEARS, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_HAND_ITEM_DROP), MetadataConstants.TROLLPLUS_HAND_ITEM_DROP, configHelperLanguage.getString(LangConstants.TROLL_GUI_HAND_ITEM_DROP_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.CONTROL_ENABLED)) {
+            getGUIHelperTroll().addItemWithLoreAndStatus(13, Material.LEAD, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_CONTROL), MetadataConstants.TROLLPLUS_CONTROL_TARGET, configHelperLanguage.getString(LangConstants.TROLL_GUI_CONTROL_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.FLIP_BACKWARDS_ENABLED)) {
+            getGUIHelperTroll().addItemWithLoreAndStatus(14, Material.COMPASS, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_FLIP_BACKWARDS), MetadataConstants.TROLLPLUS_FLIP_BEHIND, configHelperLanguage.getString(LangConstants.TROLL_GUI_FLIP_BACKWARDS_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.SPANK_ENABLED)) {
+            getGUIHelperTroll().addItemWithLoreAndStatus(15, Material.SLIME_BALL, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_SPANK), MetadataConstants.TROLLPLUS_SPANK, configHelperLanguage.getString(LangConstants.TROLL_GUI_SPANK_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.SPAM_MESSAGES_ENABLED)) {
+            getGUIHelperTroll().addItemWithLoreAndStatus(19, Material.WRITABLE_BOOK, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_SPAM_MESSAGES), MetadataConstants.TROLLPLUS_SPAM_MESSAGES, configHelperLanguage.getString(LangConstants.TROLL_GUI_SPAM_MESSAGES_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.SPAM_SOUNDS_ENABLED)) {
+            getGUIHelperTroll().addItemWithLoreAndStatus(20, Material.NOTE_BLOCK, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_SPAM_SOUNDS), MetadataConstants.TROLLPLUS_SPAM_SOUNDS, configHelperLanguage.getString(LangConstants.TROLL_GUI_SPAM_SOUNDS_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.SEMI_BAN_ENABLED)) {
+            getGUIHelperTroll().addItemWithLoreAndStatus(21, Material.TRIPWIRE_HOOK, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_SEMI_BAN), MetadataConstants.TROLLPLUS_SEMI_BAN, configHelperLanguage.getString(LangConstants.TROLL_GUI_SEMI_BAN_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.FALLING_ANVILS_ENABLED)) {
+            getGUIHelperTroll().addItemWithLoreAndStatus(22, Material.ANVIL, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_FALLING_ANVILS), MetadataConstants.TROLLPLUS_FALLING_ANVILS, configHelperLanguage.getString(LangConstants.TROLL_GUI_FALLING_ANVILS_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.TNT_TRACK_ENABLED)) {
+            getGUIHelperTroll().addItemWithLoreAndStatus(23, Material.TNT, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_TNT_TRACK), MetadataConstants.TROLLPLUS_TNT_TRACK, configHelperLanguage.getString(LangConstants.TROLL_GUI_TNT_TRACK_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.MOB_SPAWNER_ENABLED)) {
+            getGUIHelperTroll().addItemWithLoreAndStatus(24, Material.SPAWNER, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_MOB_SPAWNER), MetadataConstants.TROLLPLUS_MOB_SPAWNER, configHelperLanguage.getString(LangConstants.TROLL_GUI_MOB_SPAWNER_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.SLOWLY_KILL_ENABLED)) {
+            getGUIHelperTroll().addItemWithLoreAndStatus(25, Material.SKELETON_SKULL, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_SLOWLY_KILL), MetadataConstants.TROLLPLUS_SLOWLY_KILL, configHelperLanguage.getString(LangConstants.TROLL_GUI_SLOWLY_KILL_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.RANDOM_TELEPORT_ENABLED)) {
+            getGUIHelperTroll().addItemWithLoreAndStatus(28, Material.ENDER_EYE, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_RANDOM_TELEPORT), MetadataConstants.TROLLPLUS_RANDOM_TELEPORT, configHelperLanguage.getString(LangConstants.TROLL_GUI_RANDOM_TELEPORT_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.INVENTORY_DROP_ENABLED)) {
+            getGUIHelperTroll().addItemWithLore(33, Material.EGG, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_INVENTORY_DROP), configHelperLanguage.getString(LangConstants.TROLL_GUI_INVENTORY_DROP_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.INVENTORY_SHUFFLE_ENABLED)) {
+            getGUIHelperTroll().addItemWithLore(34, Material.BARREL, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_INVENTORY_SHUFFLE), configHelperLanguage.getString(LangConstants.TROLL_GUI_INVENTORY_SHUFFLE_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.RANDOM_SCARY_SOUND_ENABLED)) {
+            getGUIHelperTroll().addItemWithLore(38, Material.MUSIC_DISC_11, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_RANDOM_SCARY_SOUND), configHelperLanguage.getString(LangConstants.TROLL_GUI_RANDOM_SCARY_SOUND_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.ROCKET_ENABLED)) {
+            getGUIHelperTroll().addItemWithLore(39, Material.FIREWORK_ROCKET, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_ROCKET), configHelperLanguage.getString(LangConstants.TROLL_GUI_ROCKET_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.FREEFALL_ENABLED)) {
+            getGUIHelperTroll().addItemWithLore(40, Material.FEATHER, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_FREEFALL), configHelperLanguage.getString(LangConstants.TROLL_GUI_FREEFALL_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.FAKE_BAN_ENABLED)) {
+            getGUIHelperTroll().addItemWithLore(41, Material.PAPER, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_FAKE_BAN), configHelperLanguage.getString(LangConstants.TROLL_GUI_FAKE_BAN_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.FAKE_OP_ENABLED)) {
+            getGUIHelperTroll().addItemWithLore(42, Material.ENCHANTED_GOLDEN_APPLE, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_FAKE_OP), configHelperLanguage.getString(LangConstants.TROLL_GUI_FAKE_OP_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.TELEPORT_ENABLED)) {
+            getGUIHelperTroll().addItemWithLore(18, Material.ENDER_PEARL, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_TELEPORT), configHelperLanguage.getString(LangConstants.TROLL_GUI_TELEPORT_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.INVSEE_ENABLED)) {
+            getGUIHelperTroll().addItemWithLore(26, Material.CHEST, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_INVSEE), configHelperLanguage.getString(LangConstants.TROLL_GUI_INVSEE_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.KILL_ENABLED)) {
+            getGUIHelperTroll().addItemWithLore(27, Material.WITHER_SKELETON_SKULL, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_KILL), configHelperLanguage.getString(LangConstants.TROLL_GUI_KILL_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.INVSEE_ENDER_CHEST_ENABLED)) {
+            getGUIHelperTroll().addItemWithLore(35, Material.ENDER_CHEST, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_INVSEE_ENDER_CHEST), configHelperLanguage.getString(LangConstants.TROLL_GUI_INVSEE_ENDER_CHEST_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.VANISH_ENABLED)) {
+            getGUIHelperTroll().addItemWithLoreAndStatus(48, Material.POTION, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_VANISH), MetadataConstants.TROLLPLUS_VANISH, configHelperLanguage.getString(LangConstants.TROLL_GUI_VANISH_DESCRIPTION));
+        }
+        if (configHelper.getBoolean(ConfigConstants.RANDOM_TROLL_ENABLED)) {
+            getGUIHelperTroll().addItemWithLore(50, Material.CHORUS_FRUIT, ChatColor.WHITE + configHelperLanguage.getString(LangConstants.TROLL_GUI_RANDOM_TROLL), configHelperLanguage.getString(LangConstants.TROLL_GUI_RANDOM_TROLL_DESCRIPTION));
+        }
 
         // Add placeholders to the GUI
         final byte[] placeholderSlots = {0, 1, 2, 3, 5, 6, 7, 8, 45, 46, 49, 52, 53};

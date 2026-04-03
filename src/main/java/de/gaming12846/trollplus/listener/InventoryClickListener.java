@@ -100,8 +100,18 @@ public class InventoryClickListener implements Listener {
 
         // Random slot selection
         if (slot == 50) {
-            int[] slots = {10, 12, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44};
-            slot = slots[ThreadLocalRandom.current().nextInt(0, slots.length)];
+            if (!plugin.getConfigHelper().getBoolean(ConfigConstants.RANDOM_TROLL_ENABLED)) {
+                return;
+            }
+            List<Integer> slots = getEnabledRandomTrollSlots();
+            if (slots.isEmpty()) {
+                return;
+            }
+            slot = slots.get(ThreadLocalRandom.current().nextInt(0, slots.size()));
+        }
+
+        if (!isTrollModuleEnabled(slot)) {
+            return;
         }
 
         if (isTrollActionBlocked(target, slot)) {
@@ -816,6 +826,9 @@ public class InventoryClickListener implements Listener {
 
         // Determine the action based on the clicked slot
         int slot = event.getSlot();
+        if (!isTrollBowEnabled(slot)) {
+            return;
+        }
 
         // Determine which bow to give based on the clicked slot
         String bowName;
@@ -935,6 +948,131 @@ public class InventoryClickListener implements Listener {
     // Retrieves the guiHelperLanguageSettings instance
     public GUIHelper getGuiHelperLanguageSettings() {
         return guiHelperLanguageSettings;
+    }
+
+    private boolean isTrollModuleEnabled(int slot) {
+        ConfigHelper configHelper = plugin.getConfigHelper();
+        return switch (slot) {
+            case 11 -> configHelper.getBoolean(ConfigConstants.FREEZE_ENABLED);
+            case 12 -> configHelper.getBoolean(ConfigConstants.HAND_ITEM_DROP_ENABLED);
+            case 13 -> configHelper.getBoolean(ConfigConstants.CONTROL_ENABLED);
+            case 14 -> configHelper.getBoolean(ConfigConstants.FLIP_BACKWARDS_ENABLED);
+            case 15 -> configHelper.getBoolean(ConfigConstants.SPANK_ENABLED);
+            case 19 -> configHelper.getBoolean(ConfigConstants.SPAM_MESSAGES_ENABLED);
+            case 20 -> configHelper.getBoolean(ConfigConstants.SPAM_SOUNDS_ENABLED);
+            case 21 -> configHelper.getBoolean(ConfigConstants.SEMI_BAN_ENABLED);
+            case 22 -> configHelper.getBoolean(ConfigConstants.FALLING_ANVILS_ENABLED);
+            case 23 -> configHelper.getBoolean(ConfigConstants.TNT_TRACK_ENABLED);
+            case 24 -> configHelper.getBoolean(ConfigConstants.MOB_SPAWNER_ENABLED);
+            case 25 -> configHelper.getBoolean(ConfigConstants.SLOWLY_KILL_ENABLED);
+            case 28 -> configHelper.getBoolean(ConfigConstants.RANDOM_TELEPORT_ENABLED);
+            case 33 -> configHelper.getBoolean(ConfigConstants.INVENTORY_DROP_ENABLED);
+            case 34 -> configHelper.getBoolean(ConfigConstants.INVENTORY_SHUFFLE_ENABLED);
+            case 38 -> configHelper.getBoolean(ConfigConstants.RANDOM_SCARY_SOUND_ENABLED);
+            case 39 -> configHelper.getBoolean(ConfigConstants.ROCKET_ENABLED);
+            case 40 -> configHelper.getBoolean(ConfigConstants.FREEFALL_ENABLED);
+            case 41 -> configHelper.getBoolean(ConfigConstants.FAKE_BAN_ENABLED);
+            case 42 -> configHelper.getBoolean(ConfigConstants.FAKE_OP_ENABLED);
+            case 18 -> configHelper.getBoolean(ConfigConstants.TELEPORT_ENABLED);
+            case 26 -> configHelper.getBoolean(ConfigConstants.INVSEE_ENABLED);
+            case 27 -> configHelper.getBoolean(ConfigConstants.KILL_ENABLED);
+            case 35 -> configHelper.getBoolean(ConfigConstants.INVSEE_ENDER_CHEST_ENABLED);
+            case 48 -> configHelper.getBoolean(ConfigConstants.VANISH_ENABLED);
+            case 50 -> configHelper.getBoolean(ConfigConstants.RANDOM_TROLL_ENABLED);
+            default -> true;
+        };
+    }
+
+    private List<Integer> getEnabledRandomTrollSlots() {
+        List<Integer> slots = new java.util.ArrayList<>();
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.FREEZE_ENABLED)) {
+            slots.add(11);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.HAND_ITEM_DROP_ENABLED)) {
+            slots.add(12);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.CONTROL_ENABLED)) {
+            slots.add(13);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.FLIP_BACKWARDS_ENABLED)) {
+            slots.add(14);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.SPANK_ENABLED)) {
+            slots.add(15);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.SPAM_MESSAGES_ENABLED)) {
+            slots.add(19);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.SPAM_SOUNDS_ENABLED)) {
+            slots.add(20);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.SEMI_BAN_ENABLED)) {
+            slots.add(21);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.FALLING_ANVILS_ENABLED)) {
+            slots.add(22);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.TNT_TRACK_ENABLED)) {
+            slots.add(23);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.MOB_SPAWNER_ENABLED)) {
+            slots.add(24);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.SLOWLY_KILL_ENABLED)) {
+            slots.add(25);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.RANDOM_TELEPORT_ENABLED)) {
+            slots.add(28);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.INVENTORY_DROP_ENABLED)) {
+            slots.add(33);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.INVENTORY_SHUFFLE_ENABLED)) {
+            slots.add(34);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.RANDOM_SCARY_SOUND_ENABLED)) {
+            slots.add(38);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.ROCKET_ENABLED)) {
+            slots.add(39);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.FREEFALL_ENABLED)) {
+            slots.add(40);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.FAKE_BAN_ENABLED)) {
+            slots.add(41);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.FAKE_OP_ENABLED)) {
+            slots.add(42);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.TELEPORT_ENABLED)) {
+            slots.add(18);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.INVSEE_ENABLED)) {
+            slots.add(26);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.KILL_ENABLED)) {
+            slots.add(27);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.INVSEE_ENDER_CHEST_ENABLED)) {
+            slots.add(35);
+        }
+        if (plugin.getConfigHelper().getBoolean(ConfigConstants.VANISH_ENABLED)) {
+            slots.add(48);
+        }
+        return slots;
+    }
+
+    private boolean isTrollBowEnabled(int slot) {
+        ConfigHelper configHelper = plugin.getConfigHelper();
+        return switch (slot) {
+            case 2 -> configHelper.getBoolean(ConfigConstants.TROLLBOWS_EXPLOSION_BOW_ENABLED);
+            case 3 -> configHelper.getBoolean(ConfigConstants.TROLLBOWS_TNT_BOW_ENABLED);
+            case 4 -> configHelper.getBoolean(ConfigConstants.TROLLBOWS_LIGHTNING_BOLT_BOW_ENABLED);
+            case 5 -> configHelper.getBoolean(ConfigConstants.TROLLBOWS_SILVERFISH_BOW_ENABLED);
+            case 6 -> configHelper.getBoolean(ConfigConstants.TROLLBOWS_POTION_EFFECT_BOW_ENABLED);
+            default -> true;
+        };
     }
 
     // Handles the language change setting
