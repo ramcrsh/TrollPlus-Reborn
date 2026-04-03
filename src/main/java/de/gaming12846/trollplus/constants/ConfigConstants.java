@@ -18,6 +18,32 @@ public class ConfigConstants {
     public static final String SET_FIRE = "set-fire";
     public static final String BREAK_BLOCKS = "break-blocks";
     // Troll settings
+    public static final String FREEZE_ENABLED = "freeze.enabled";
+    public static final String HAND_ITEM_DROP_ENABLED = "hand-item-drop.enabled";
+    public static final String CONTROL_ENABLED = "control.enabled";
+    public static final String FLIP_BACKWARDS_ENABLED = "flip-backwards.enabled";
+    public static final String SPANK_ENABLED = "spank.enabled";
+    public static final String SPAM_MESSAGES_ENABLED = "spam-messages.enabled";
+    public static final String SPAM_SOUNDS_ENABLED = "spam-sounds.enabled";
+    public static final String SEMI_BAN_ENABLED = "semi-ban.enabled";
+    public static final String FALLING_ANVILS_ENABLED = "falling-anvils.enabled";
+    public static final String TNT_TRACK_ENABLED = "tnt-track.enabled";
+    public static final String MOB_SPAWNER_ENABLED = "mob-spawner.enabled";
+    public static final String SLOWLY_KILL_ENABLED = "slowly-kill.enabled";
+    public static final String RANDOM_TELEPORT_ENABLED = "random-teleport.enabled";
+    public static final String INVENTORY_DROP_ENABLED = "inventory-drop.enabled";
+    public static final String INVENTORY_SHUFFLE_ENABLED = "inventory-shuffle.enabled";
+    public static final String RANDOM_SCARY_SOUND_ENABLED = "random-scary-sound.enabled";
+    public static final String ROCKET_ENABLED = "rocket.enabled";
+    public static final String FREEFALL_ENABLED = "freefall.enabled";
+    public static final String FAKE_BAN_ENABLED = "fake-ban.enabled";
+    public static final String FAKE_OP_ENABLED = "fake-op.enabled";
+    public static final String TELEPORT_ENABLED = "teleport.enabled";
+    public static final String INVSEE_ENABLED = "invsee.enabled";
+    public static final String KILL_ENABLED = "kill.enabled";
+    public static final String INVSEE_ENDER_CHEST_ENABLED = "invsee-ender-chest.enabled";
+    public static final String VANISH_ENABLED = "vanish.enabled";
+    public static final String RANDOM_TROLL_ENABLED = "random-troll.enabled";
     public static final String VANISH_JOIN_MESSAGE_ENABLED = "vanish.join-message-enabled";
     public static final String VANISH_QUIT_MESSAGE_ENABLED = "vanish.quit-message-enabled";
     public static final String HAND_ITEM_DROP_PERIOD = "hand-item-drop-period";
@@ -39,6 +65,11 @@ public class ConfigConstants {
     public static final String FAKE_BAN_MESSAGE_BROADCAST_ENABLED = "fake-ban-message-broadcast-enabled";
     public static final String FAKE_OP_MESSAGE_BROADCAST_ENABLED = "fake-op-message-broadcast-enabled";
     public static final String FREEFALL_HEIGHT = "freefall-height";
+    public static final String TROLLBOWS_EXPLOSION_BOW_ENABLED = "trollbows.explosion-bow.enabled";
+    public static final String TROLLBOWS_TNT_BOW_ENABLED = "trollbows.tnt-bow.enabled";
+    public static final String TROLLBOWS_LIGHTNING_BOLT_BOW_ENABLED = "trollbows.lightning-bolt-bow.enabled";
+    public static final String TROLLBOWS_SILVERFISH_BOW_ENABLED = "trollbows.silverfish-bow.enabled";
+    public static final String TROLLBOWS_POTION_EFFECT_BOW_ENABLED = "trollbows.potion-effect-bow.enabled";
 
     // Prevent instantiation
     private ConfigConstants() {

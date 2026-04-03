@@ -6,6 +6,7 @@
 package de.gaming12846.trollplus.commands;
 
 import de.gaming12846.trollplus.TrollPlus;
+import de.gaming12846.trollplus.constants.ConfigConstants;
 import de.gaming12846.trollplus.constants.LangConstants;
 import de.gaming12846.trollplus.constants.PermissionConstants;
 import de.gaming12846.trollplus.utils.ConfigHelper;
@@ -61,14 +62,25 @@ public class TrollBowsCommand implements CommandExecutor {
 
     // Creates the TrollBows GUI for the player
     private void createTrollBowsGUI(ConfigHelper configHelperLanguage) {
+        ConfigHelper configHelper = plugin.getConfigHelper();
         guiHelperTrollBows = new GUIHelper(ChatColor.BLACK + configHelperLanguage.getString(LangConstants.TROLLBOWS_TITLE), 9);
 
         // Add troll bows to the GUI
-        getGUIHelperTrollBows().addItem(2, ItemBuilder.createBow(plugin, configHelperLanguage.getString(LangConstants.TROLLBOWS_EXPLOSION_BOW), configHelperLanguage.getString(LangConstants.TROLLBOWS_EXPLOSION_BOW_DESCRIPTION)));
-        getGUIHelperTrollBows().addItem(3, ItemBuilder.createBow(plugin, configHelperLanguage.getString(LangConstants.TROLLBOWS_TNT_BOW), configHelperLanguage.getString(LangConstants.TROLLBOWS_TNT_BOW_DESCRIPTION)));
-        getGUIHelperTrollBows().addItem(4, ItemBuilder.createBow(plugin, configHelperLanguage.getString(LangConstants.TROLLBOWS_LIGHTNING_BOLT_BOW), configHelperLanguage.getString(LangConstants.TROLLBOWS_LIGHTNING_BOLT_BOW_DESCRIPTION)));
-        getGUIHelperTrollBows().addItem(5, ItemBuilder.createBow(plugin, configHelperLanguage.getString(LangConstants.TROLLBOWS_SILVERFISH_BOW), configHelperLanguage.getString(LangConstants.TROLLBOWS_SILVERFISH_BOW_DESCRIPTION)));
-        getGUIHelperTrollBows().addItem(6, ItemBuilder.createBow(plugin, configHelperLanguage.getString(LangConstants.TROLLBOWS_POTION_EFFECT_BOW), configHelperLanguage.getString(LangConstants.TROLLBOWS_POTION_EFFECT_BOW_DESCRIPTION)));
+        if (configHelper.getBoolean(ConfigConstants.TROLLBOWS_EXPLOSION_BOW_ENABLED)) {
+            getGUIHelperTrollBows().addItem(2, ItemBuilder.createBow(plugin, configHelperLanguage.getString(LangConstants.TROLLBOWS_EXPLOSION_BOW), configHelperLanguage.getString(LangConstants.TROLLBOWS_EXPLOSION_BOW_DESCRIPTION)));
+        }
+        if (configHelper.getBoolean(ConfigConstants.TROLLBOWS_TNT_BOW_ENABLED)) {
+            getGUIHelperTrollBows().addItem(3, ItemBuilder.createBow(plugin, configHelperLanguage.getString(LangConstants.TROLLBOWS_TNT_BOW), configHelperLanguage.getString(LangConstants.TROLLBOWS_TNT_BOW_DESCRIPTION)));
+        }
+        if (configHelper.getBoolean(ConfigConstants.TROLLBOWS_LIGHTNING_BOLT_BOW_ENABLED)) {
+            getGUIHelperTrollBows().addItem(4, ItemBuilder.createBow(plugin, configHelperLanguage.getString(LangConstants.TROLLBOWS_LIGHTNING_BOLT_BOW), configHelperLanguage.getString(LangConstants.TROLLBOWS_LIGHTNING_BOLT_BOW_DESCRIPTION)));
+        }
+        if (configHelper.getBoolean(ConfigConstants.TROLLBOWS_SILVERFISH_BOW_ENABLED)) {
+            getGUIHelperTrollBows().addItem(5, ItemBuilder.createBow(plugin, configHelperLanguage.getString(LangConstants.TROLLBOWS_SILVERFISH_BOW), configHelperLanguage.getString(LangConstants.TROLLBOWS_SILVERFISH_BOW_DESCRIPTION)));
+        }
+        if (configHelper.getBoolean(ConfigConstants.TROLLBOWS_POTION_EFFECT_BOW_ENABLED)) {
+            getGUIHelperTrollBows().addItem(6, ItemBuilder.createBow(plugin, configHelperLanguage.getString(LangConstants.TROLLBOWS_POTION_EFFECT_BOW), configHelperLanguage.getString(LangConstants.TROLLBOWS_POTION_EFFECT_BOW_DESCRIPTION)));
+        }
 
         // Add placeholders to the GUI
         final byte[] placeholderSlots = {0, 8};
